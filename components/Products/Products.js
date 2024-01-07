@@ -5,11 +5,13 @@ class Products {
 
         CATALOG.forEach(({ id, name, price, img }) => {
             htmlCatalog += ` 
-            <li>
-                <span> ${name}</span>
-                <img src="${img}" alt="${name}">
-                <span> ${price}</span>
-                <button>Добавить в корзину</button>
+            <li class="products-element">
+                <span class="products-element__name"> ${name}</span>
+                <img class="products-element__img" src="${img}" alt="${name}">
+                <span class="products-element__price">
+                💲 ${price.toLocaleString()} RUB
+                </span>
+                <button class="products-element__btn">Добавить в корзину</button>
             </li>
             `;
         });
