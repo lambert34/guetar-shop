@@ -20,7 +20,7 @@ class LocalStorageUtil {
             products.push(id);
             pushProduct = true;
         } else {
-            products.splise(index, 1);
+            products.splice(index, 1);
         }
 
         localStorage.setItem(this.keyName, JSON.stringify(products));

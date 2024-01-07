@@ -1,9 +1,37 @@
 class Products {
+    constructor() {
+        this.classNameActive = 'products-element__btn_active';
+        this.lableAdd = 'Добавить в корзину';
+        this.lableRemuve = 'Удалить из корзины';
+    }
+
+    handleSetLocationStorage(element, id) {
+        const { pushProduct, products } =localStorageUtil.putProducts(id);
+
+        if (pushProduct) {
+            element.classList.add(this.classNameActive);
+            element.innerHTML = this.lableRemuve;
+        } else {
+            element.classList.remove(this.classNameActive);
+            element.innerHTML = this.lableAdd;
+        }
+    }
 
     render() {
+        const productsStore = localStorageUtil.getProducts();
         let htmlCatalog = '';
 
         CATALOG.forEach(({ id, name, price, img }) => {
+            let activeClass = '';
+            let activeText = '';
+
+            if (productsStore.indexOf(id) === -1) {
+                activeText = this.lableAdd;
+            } else {
+                activeClass = '' + this.classNameActive;
+                activeText = this.lableRemuve;
+            }
+
             htmlCatalog += ` 
             <li class="products-element">
                 <span class="products-element__name"> ${name}</span>
@@ -11,7 +39,9 @@ class Products {
                 <span class="products-element__price">
                 💲 ${price.toLocaleString()} RUB
                 </span>
-                <button class="products-element__btn">Добавить в корзину</button>
+                <button class="products-element__btn ${activeClass}" onclick="productsPage.handleSetLocationStorage(this, '${id}');">
+                    ${activeText}
+                </button>
             </li>
             `;
         });
