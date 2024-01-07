@@ -1,9 +1,26 @@
 class Products {
 
     render() {
-        CATALOG.forEach((element) => {
-            console.log(element);
-        })
+        let htmlCatalog = '';
+
+        CATALOG.forEach(({ id, name, price, img }) => {
+            htmlCatalog += ` 
+            <li>
+                <span> ${name}</span>
+                <img src="${img}" alt="${name}">
+                <span> ${price}</span>
+                <button>Добавить в корзину</button>
+            </li>
+            `;
+        });
+
+        const html = `
+        <ul class="products-container">
+            ${htmlCatalog}
+        </ul>
+        `;
+
+        ROOT_PRODUCTS.innerHTML = html;
     }
 }
 
