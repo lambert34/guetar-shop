@@ -6,12 +6,15 @@ function render() {
     productsPage.render();
 }
 
+spinnerPage.render();
+
 let CATALOG = [];
 
 fetch('server/catalog.json')
     .then(res => res.json())
     .then(body => {
         CATALOG = body;
+        spinnerPage.handleClear();
         render();
     })
 
