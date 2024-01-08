@@ -6,6 +6,17 @@ function render() {
     productsPage.render();
 }
 
-render();
-
 let CATALOG = [];
+
+fetch('server/catalog.json')
+    .then(res => res.json())
+    .then(body => {
+        CATALOG = body;
+        render();
+    })
+
+    .catch(error => {
+        console.log(error);
+    });
+
+//axios - библиотека для запросов через Internet Explorer, если надо
